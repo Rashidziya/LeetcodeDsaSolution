@@ -1,0 +1,29 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        ListNode *temp,*prev,*front;
+        temp=head;
+        prev=NULL;
+        while(temp!=NULL){
+            front=temp->next;
+            temp->next=prev;
+            prev=temp;
+            temp=front;
+        }
+
+        return prev;
+    }
+};
+// somehow try to change the current node point to the prev node bwtween two nodes 
+
+// and then move the prev node and current node to do the same all other node in the list. 
