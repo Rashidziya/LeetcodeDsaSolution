@@ -1,0 +1,49 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    
+    bool isPalindrome(ListNode* head) {
+        // apply the cycle detection floyd algo. A/c to that slow pointer
+        // will always be at he middle of list.
+        ListNode* slow=head;
+        ListNode* fast=head;
+        while(fast && fast->next){
+            slow=slow->next;
+            fast=fast->next->next;
+        }
+        // now we have to reverse the other half of the list then we can match
+        // the list using two pointer 
+        ListNode *prev,*temp=NULL;
+        prev=slow;
+        slow=slow->next;
+        prev->next=NULL; // this is for indicating that last node of the reversed list from this node . this has overrided the addres of the next node as NULL it means if we come back from the 
+// reversed list then it will be the last node .so that we can match the values fo both halfs.
+        while(slow){
+            temp=slow->next;
+            slow->next=prev;
+            prev=slow;
+            slow=temp;
+        }
+        // now at the end we have to match the element from both end
+
+        slow=prev;
+        fast=head; 
+        while(slow){
+            if(slow->val!=fast->val){
+                return false;
+            }
+            slow=slow->next;
+            fast=fast->next;
+        }
+        return true;
+    }
+};
