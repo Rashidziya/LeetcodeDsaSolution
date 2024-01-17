@@ -1,0 +1,31 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool hasCycle(ListNode *head) {
+        // if(head->next==NULL) return false;
+        // take 2 pointers one is slow and another one is fast
+        ListNode *slow=head;
+        ListNode *fast=head;
+        // fast is moving wiht two node at a time
+        // while slow is moving by one node at a time so it is definite that fast will become 
+        // greater or equal to the slow pointer
+        while(fast!=NULL && fast->next !=NULL){
+            slow=slow->next;
+            fast=fast->next->next;
+            // if any point fast == slow it means there is cycle exist .
+            if(slow==fast){
+                return true;
+            }
+        }
+        return false;
+    }
+};
+
+// Floyd’s Cycle-Finding Algorithm // fast slow approach // 2 pointers // "tortoise and the hare algorithm"
