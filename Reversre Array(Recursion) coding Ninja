@@ -1,0 +1,20 @@
+// void swapFun(int a, int b){
+//     int *temp;
+//     temp=a;
+//     a=b;
+//     b=temp;
+// }
+void funForSwap(int i,int n,vector<int> &nums){
+    if(i>=n/2) return;
+    swap(nums[i],nums[n-i-1]);
+    funForSwap(i+1,n,nums);
+}
+vector<int> reverseArray(int n, vector<int> &nums)
+{
+    // Write your code here.
+    // we can apply two pointer approach to swap the first ele with last elem ans so on
+    int i=0;
+    funForSwap(0,n,nums);
+
+    return nums;
+}
