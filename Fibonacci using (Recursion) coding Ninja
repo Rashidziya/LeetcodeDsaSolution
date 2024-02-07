@@ -1,0 +1,28 @@
+
+int findFibonacci(int n){
+    if(n<=1) return n;
+    return findFibonacci(n-2)+findFibonacci(n-3);
+}
+void GenerateFibonacci(vector<int> &ans,int n){
+    if(n==1){
+        ans.push_back(0);
+        return;
+    }
+    if(n==2){
+        ans.push_back(0);
+        ans.push_back(1);
+        return;
+    }
+    GenerateFibonacci(ans,n-1);
+    ans.push_back(ans[n-3]+ans[n-2]);
+    // Array index start from 0
+    
+}
+vector<int> generateFibonacciNumbers(int n) {
+    // Write your code here.
+    // Array to store ther fibo numbers
+    vector<int> ans;
+    GenerateFibonacci(ans,n);
+    
+    return ans;                
+}
