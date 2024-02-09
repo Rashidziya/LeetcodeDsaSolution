@@ -1,0 +1,25 @@
+class Solution {
+    double findPow(double x,long n){
+        // Base Condition
+        if(n==0) return 1;
+        else if(n%2==0){
+            return findPow(x*x,n/2);
+        }else{
+            return x*findPow(x*x,(n-1)/2);
+        }
+    }
+public:
+    double myPow(double x, int n) {
+        // BY looping TLE Occurs
+        // So we can minimize the Time Complexity By using Recursion
+        // 2^10=2*2^9
+        long nn=n;
+        if(nn<0){
+            nn=-1*nn;
+            double ans=findPow(x,nn);
+            return 1/ans;
+        }else{
+            return findPow(x,nn);
+        }
+    }
+};
