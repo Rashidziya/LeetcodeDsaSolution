@@ -1,0 +1,19 @@
+class Solution {
+    void backtrackParenthesis(vector<string> &ans,int open,int close,string curr_str,int n){
+        // Base Case 
+        if(curr_str.size()==n*2){
+            ans.push_back(curr_str);
+            return;
+        }
+        if(open<n) backtrackParenthesis(ans,open+1,close,curr_str+"(",n);
+        if(close<open) backtrackParenthesis(ans,open,close+1,curr_str+")",n);
+    }
+public:
+    vector<string> generateParenthesis(int n) {
+        vector<string> ans;
+        // Calling a Function which will Add the parethesis recursively 
+        // Using BackTracking 
+        backtrackParenthesis(ans,0,0,"",n);
+        return ans;
+    }
+};
