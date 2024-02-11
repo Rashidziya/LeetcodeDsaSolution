@@ -1,0 +1,23 @@
+class Solution {
+private:
+    void powerSet(int i,vector<int> nums, vector<vector<int>> &ans,vector<int> output){
+        if(i>=nums.size()){
+            ans.push_back(output);
+            return;
+        }
+
+        // Recursive Call for Exclude 
+        powerSet(i+1,nums,ans,output);
+        // Call for Include 
+        int element=nums[i];
+        output.push_back(element);
+        powerSet(i+1,nums,ans,output);
+    }
+public:
+    vector<vector<int>> subsets(vector<int>& nums) {
+        vector<vector<int>> ans;
+        vector<int> output;
+        powerSet(0,nums,ans,output);
+        return ans;
+    }
+};
