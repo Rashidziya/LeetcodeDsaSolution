@@ -1,0 +1,39 @@
+
+int AtoiFun(string s,int i,int sign, long result){
+    if(sign*result>=INT_MAX) return INT_MAX;
+    if(sign*result<=INT_MIN) return INT_MIN;
+    if(i>=s.size() || s[i]<'0' || s[i]>'9'){
+        return (int)(sign*result);                    // base cAse
+    }
+    
+    // Recursive Call For Smaller Problem
+    return AtoiFun(s,i+1,sign,(result*10+s[i]-'0'));
+    // return result;
+
+}
+
+int createAtoi(string s) {
+    // Write your code here.
+    if(s.length()==0) return 0;
+    // Discarding leading white Spaces
+    int i=0;
+    while(i<s.length()){
+        if(s[i]==' '){
+            i++;
+        }else{break;}
+    }
+    // if leading white space then update the new string
+    // s=s.substr(i);
+    // int len=s.length();
+    int sign=1;
+    if(s[i]=='-'){                    // T.c=> O(n) n is the white spaces in begginning
+                                     // +o(N) Call for converting string into integer
+                                     // S.C=> O(n) because recursion takes internal call stack
+        sign=-1;
+        ++i;
+    }
+    else if(s[i]=='+') ++i;
+
+    // CAll Recursive Function for i th index to last 
+    return AtoiFun(s,i,sign,0);
+}
