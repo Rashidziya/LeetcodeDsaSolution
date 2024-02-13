@@ -1,0 +1,31 @@
+class Solution {
+private:
+    vector<vector<int>> ans;
+    void findSubSet(vector<int> &nums,vector<int> &currSet,int index){
+        // base Case
+        ans.push_back(currSet);
+        // Inclusion
+        for(int i=index;i<nums.size();i++){
+            if(i!=index && nums[i]==nums[i-1])
+                continue;
+            currSet.push_back(nums[i]);
+            findSubSet(nums,currSet,i+1);
+            currSet.pop_back();
+        }
+    }
+public:
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        // To Avoid Duplicates Sort the Array
+        sort(nums.begin(),nums.end());
+        vector<int> currSet;
+        // fn call 
+        findSubSet(nums,currSet,0);
+        return ans;
+    }
+
+};
+
+// T.C => O(2^n)*O(N) for Recusrion for n elements to find power set and
+//        other one is for Deep Copying the set of value into ans data sTructure.
+// S.C => O(2^n) for generating all subSet and  every time storing the value
+//        and O(k) for every subSet will have average length k
