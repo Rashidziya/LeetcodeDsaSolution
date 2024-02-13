@@ -1,0 +1,29 @@
+class Solution {
+private:
+    vector<string> ans;
+    void Solve(string digits,string op,int index,string mapping[]){
+        // base case
+        if(op.length()==digits.length()){
+            ans.push_back(op);
+            return;
+        }
+        int num=digits[index]-'0';
+        string value = mapping[num];
+
+        for(int i=0;i<value.length();i++){
+            op.push_back(value[i]);
+            // Recursive Call
+            Solve(digits,op,index+1,mapping);
+            op.pop_back();
+        }
+
+    }
+public:
+    vector<string> letterCombinations(string digits) {
+        if(digits.length()==0) return {};
+        string op="";
+        string mapping[10]={"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+        Solve(digits,op,0,mapping);
+        return ans;
+    }
+};
