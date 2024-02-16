@@ -1,0 +1,27 @@
+class Solution {
+private:
+    vector<vector<int>> ans;
+    void solve(vector<int> nums,int index){
+        // base case 
+        if(index>=nums.size()){
+            ans.push_back(nums);
+            return;
+        }
+
+        // every element in the array should be placed at first index 
+        // and after that recursion will do for rest places in next function call recursively same thing
+        for (int i=index;i<nums.size();i++){
+            swap(nums[index],nums[i]);
+            // recursive call
+            solve(nums,index+1);
+            // backtrack
+            swap(nums[index],nums[i]);
+        }
+    }
+public:
+    vector<vector<int>> permute(vector<int>& nums) {
+        int index=0;
+        solve(nums,index);
+        return ans;
+    }
+};
